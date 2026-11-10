@@ -33,7 +33,9 @@ jobs:
     # apache/spark and would otherwise re-run the full build on every sync.
     # Post-merge sampling on apache/spark master and branch-4.x is applied by
     # dev/merge_spark_pr.py through GitHub's workflow-skip commit trailer.
-    if: github.repository == 'apache/spark' || github.ref != 'refs/heads/master'
+    if: >-
+      github.ref != 'refs/heads/stack/reyden-spark58867-focused-ci' &&
+      (github.repository == 'apache/spark' || github.ref != 'refs/heads/master')
     uses: ./.github/workflows/build_and_test.yml
     with:
       # Sampled upstream pushes run the full job matrix.
